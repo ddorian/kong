@@ -669,7 +669,7 @@ function CassandraConnector:setup_locks(default_ttl, no_schema_consensus)
     CREATE TABLE IF NOT EXISTS locks(
       key text PRIMARY KEY,
       owner text
-    ) WITH default_time_to_live = %d
+    ) WITH default_time_to_live = %d AND transactions = { 'enabled' : true }
   ]], default_ttl)
 
   local ok, err = self:query(cql)
@@ -908,7 +908,7 @@ do
         pending         set<text>,
 
         PRIMARY KEY (key, subsystem)
-      )
+      ) WITH transactions = { 'enabled' : true }
     ]])
     if not res then
       return nil, err
@@ -978,6 +978,7 @@ do
           if string.find(err, "Column .- was not found in table")
           or string.find(err, "[Ii]nvalid column name")
           or string.find(err, "[Uu]ndefined column name")
+          or string.find(err, "[Dd]uplicate Column")
           or string.find(err, "No column definition found for column")
           or string.find(err, "Undefined name .- in selection clause")
           then
