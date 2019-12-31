@@ -3,7 +3,7 @@ return {
     up = [[
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "routes" ADD "name" TEXT UNIQUE;
+        ALTER TABLE  "routes" ADD "name" TEXT UNIQUE;
       EXCEPTION WHEN DUPLICATE_COLUMN THEN
         -- Do nothing, accept existing state
       END;
@@ -19,7 +19,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "routes" ADD "sources" JSONB[];
+        ALTER TABLE  "routes" ADD "sources" JSONB[];
       EXCEPTION WHEN DUPLICATE_COLUMN THEN
         -- Do nothing, accept existing state
       END;
@@ -27,7 +27,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "routes" ADD "destinations" JSONB[];
+        ALTER TABLE  "routes" ADD "destinations" JSONB[];
       EXCEPTION WHEN DUPLICATE_COLUMN THEN
         -- Do nothing, accept existing state
       END;
@@ -43,37 +43,9 @@ return {
       END$$;
 
 
-
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "plugins"
-          DROP CONSTRAINT IF EXISTS "plugins_pkey";
-      EXCEPTION WHEN DUPLICATE_TABLE OR INVALID_TABLE_DEFINITION THEN
-          -- Do nothing, accept existing state
-      END;
-      $$;
-
-      DO $$
-      BEGIN
-        ALTER TABLE IF EXISTS ONLY "plugins"
-          DROP CONSTRAINT IF EXISTS "plugins_id_key";
-      EXCEPTION WHEN DUPLICATE_TABLE OR INVALID_TABLE_DEFINITION THEN
-          -- Do nothing, accept existing state
-      END;
-      $$;
-
-      DO $$
-      BEGIN
-        ALTER TABLE IF EXISTS ONLY "plugins"
-          ADD PRIMARY KEY ("id");
-      EXCEPTION WHEN DUPLICATE_TABLE OR INVALID_TABLE_DEFINITION THEN
-          -- Do nothing, accept existing state
-      END;
-      $$;
-
-      DO $$
-      BEGIN
-        ALTER TABLE IF EXISTS ONLY "plugins" ADD "cache_key" TEXT UNIQUE;
+        ALTER TABLE  "plugins" ADD "cache_key" TEXT UNIQUE;
       EXCEPTION WHEN DUPLICATE_COLUMN THEN
         -- Do nothing, accept existing state
       END;
@@ -157,7 +129,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "snis"
+        ALTER TABLE  "snis"
           RENAME CONSTRAINT "snis_name_unique" TO "snis_name_key";
       EXCEPTION WHEN UNDEFINED_OBJECT OR DUPLICATE_TABLE THEN
           -- Do nothing, accept existing state
@@ -166,7 +138,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "plugins" ADD "run_on" TEXT;
+        ALTER TABLE  "plugins" ADD "run_on" TEXT;
       EXCEPTION WHEN DUPLICATE_COLUMN THEN
         -- Do nothing, accept existing state
       END;
@@ -183,7 +155,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "apis"
+        ALTER TABLE  "apis"
           ALTER "created_at" TYPE TIMESTAMP WITH TIME ZONE USING "created_at" AT TIME ZONE 'UTC',
           ALTER "created_at" SET DEFAULT CURRENT_TIMESTAMP(3) AT TIME ZONE 'UTC';
       EXCEPTION WHEN UNDEFINED_COLUMN THEN
@@ -192,7 +164,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "consumers"
+        ALTER TABLE  "consumers"
           ALTER "created_at" TYPE TIMESTAMP WITH TIME ZONE USING "created_at" AT TIME ZONE 'UTC',
           ALTER "created_at" SET DEFAULT CURRENT_TIMESTAMP(0) AT TIME ZONE 'UTC';
       EXCEPTION WHEN UNDEFINED_COLUMN THEN
@@ -201,7 +173,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "plugins"
+        ALTER TABLE  "plugins"
           ALTER "config" TYPE JSONB USING "config"::JSONB;
       EXCEPTION WHEN UNDEFINED_COLUMN THEN
         -- Do nothing, accept existing state
@@ -209,7 +181,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "plugins"
+        ALTER TABLE  "plugins"
           ALTER "created_at" TYPE TIMESTAMP WITH TIME ZONE USING "created_at" AT TIME ZONE 'UTC',
           ALTER "created_at" SET DEFAULT CURRENT_TIMESTAMP(0) AT TIME ZONE 'UTC';
       EXCEPTION WHEN UNDEFINED_COLUMN THEN
@@ -218,7 +190,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "upstreams"
+        ALTER TABLE  "upstreams"
           ALTER "healthchecks" TYPE JSONB USING "healthchecks"::JSONB;
       EXCEPTION WHEN UNDEFINED_COLUMN THEN
         -- Do nothing, accept existing state
@@ -226,7 +198,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "upstreams"
+        ALTER TABLE  "upstreams"
           ALTER "created_at"   TYPE TIMESTAMP WITH TIME ZONE USING "created_at" AT TIME ZONE 'UTC',
           ALTER "created_at"   SET DEFAULT CURRENT_TIMESTAMP(3) AT TIME ZONE 'UTC';
       EXCEPTION WHEN UNDEFINED_COLUMN THEN
@@ -235,7 +207,7 @@ return {
 
       DO $$
       BEGIN
-        ALTER TABLE IF EXISTS ONLY "targets"
+        ALTER TABLE  "targets"
           ALTER "created_at" TYPE TIMESTAMP WITH TIME ZONE USING "created_at" AT TIME ZONE 'UTC',
           ALTER "created_at" SET DEFAULT CURRENT_TIMESTAMP(3) AT TIME ZONE 'UTC';
       EXCEPTION WHEN UNDEFINED_COLUMN THEN
