@@ -37,7 +37,7 @@ return {
         rsa_public_key text,
         key            text,
         secret         text
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS ON jwt_secrets(key);
       CREATE INDEX IF NOT EXISTS ON jwt_secrets(secret);
       CREATE INDEX IF NOT EXISTS ON jwt_secrets(consumer_id);

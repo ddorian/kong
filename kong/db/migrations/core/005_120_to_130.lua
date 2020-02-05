@@ -104,7 +104,7 @@ return {
         created_at timestamp,
         tags set<text>,
         PRIMARY KEY (partition, id)
-      );
+      ) WITH transactions = { 'enabled' : true };
 
       CREATE INDEX IF NOT EXISTS ca_certificates_cert_idx ON ca_certificates(cert);
 

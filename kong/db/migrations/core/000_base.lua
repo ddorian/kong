@@ -276,7 +276,7 @@ return {
         data    text,
         nbf     timestamp,
         PRIMARY KEY (channel, at, node_id, id)
-      ) WITH default_time_to_live = 86400;
+      ) WITH default_time_to_live = 86400 AND transactions = { 'enabled' : true };
 
 
 
@@ -295,7 +295,7 @@ return {
         write_timeout   int,
         retries         int,
         PRIMARY KEY     (partition, id)
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS services_name_idx ON services(name);
 
 
@@ -314,7 +314,7 @@ return {
         service_id     uuid,
         regex_priority int,
         PRIMARY KEY    (partition, id)
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS routes_service_id_idx ON routes(service_id);
 
 
@@ -326,7 +326,7 @@ return {
         certificate_id     uuid,
         created_at         timestamp,
         PRIMARY KEY        (partition, id)
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS snis_name_idx ON snis(name);
       CREATE INDEX IF NOT EXISTS snis_certificate_id_idx
         ON snis(certificate_id);
@@ -340,7 +340,7 @@ return {
         key text,
         created_at timestamp,
         PRIMARY KEY (partition, id)
-      );
+      ) WITH transactions = { 'enabled' : true };
 
 
 
@@ -349,7 +349,7 @@ return {
         created_at timestamp,
         username   text,
         custom_id  text
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS consumers_username_idx ON consumers(username);
       CREATE INDEX IF NOT EXISTS consumers_custom_id_idx ON consumers(custom_id);
 
@@ -366,7 +366,7 @@ return {
         route_id    uuid,
         service_id  uuid,
         PRIMARY KEY (id, name)
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS plugins_name_idx ON plugins(name);
       CREATE INDEX IF NOT EXISTS plugins_api_id_idx ON plugins(api_id);
       CREATE INDEX IF NOT EXISTS plugins_route_id_idx ON plugins(route_id);
@@ -388,7 +388,7 @@ return {
         name                 text,
         slots                int,
         host_header          text
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS upstreams_name_idx ON upstreams(name);
 
 
@@ -399,7 +399,7 @@ return {
         target      text,
         upstream_id uuid,
         weight      int
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS targets_upstream_id_idx ON targets(upstream_id);
       CREATE INDEX IF NOT EXISTS targets_target_idx ON targets(target);
 
@@ -421,7 +421,7 @@ return {
         upstream_send_timeout    int,
         upstream_url             text,
         uris                     text
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS apis_name_idx ON apis(name);
     ]],
   },

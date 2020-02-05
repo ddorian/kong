@@ -26,7 +26,7 @@ return {
         consumer_id uuid,
         username    text,
         secret      text
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS ON hmacauth_credentials(username);
       CREATE INDEX IF NOT EXISTS ON hmacauth_credentials(consumer_id);
     ]],

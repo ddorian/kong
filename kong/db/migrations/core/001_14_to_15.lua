@@ -274,7 +274,7 @@ return {
         enabled boolean,
         cache_key text,
         PRIMARY KEY (id)
-      );
+      ) WITH transactions = { 'enabled' : true };
 
 
 
@@ -282,7 +282,7 @@ return {
         pk boolean PRIMARY KEY,
         key text,
         cert text
-      );
+      ) WITH transactions = { 'enabled' : true };
     ]],
 
     teardown = function(connector, helpers)
@@ -365,7 +365,7 @@ return {
           protocols set<text>, -- added in 1.1.0
           tags set<text>, -- added in 1.1.0
           PRIMARY KEY (id)
-        );
+        ) WITH transactions = { 'enabled' : true };
       ]]))
 
       local _, err = connector:query("CREATE INDEX IF NOT EXISTS ON plugins(name)")

@@ -48,7 +48,7 @@ return {
           route_id    uuid,
           value       counter,
           PRIMARY KEY ((identifier, period, period_date, service_id, route_id))
-        );
+        ) WITH transactions = { 'enabled' : true };
       ]]))
     end,
   },

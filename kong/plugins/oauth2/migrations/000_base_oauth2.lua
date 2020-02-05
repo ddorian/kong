@@ -80,7 +80,7 @@ return {
         client_secret text,
         name          text,
         redirect_uri  text
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS ON oauth2_credentials(client_id);
       CREATE INDEX IF NOT EXISTS ON oauth2_credentials(consumer_id);
       CREATE INDEX IF NOT EXISTS ON oauth2_credentials(client_secret);
@@ -96,7 +96,7 @@ return {
         authenticated_userid text,
         code                 text,
         scope                text
-      ) WITH default_time_to_live = 300;
+      ) WITH default_time_to_live = 300 AND transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS ON oauth2_authorization_codes(code);
       CREATE INDEX IF NOT EXISTS ON oauth2_authorization_codes(api_id);
       CREATE INDEX IF NOT EXISTS ON oauth2_authorization_codes(service_id);
@@ -117,7 +117,7 @@ return {
         scope                text,
         token_type           text,
         expires_in           int
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS ON oauth2_tokens(api_id);
       CREATE INDEX IF NOT EXISTS ON oauth2_tokens(service_id);
       CREATE INDEX IF NOT EXISTS ON oauth2_tokens(access_token);

@@ -109,7 +109,7 @@ return {
         identifier  text,
         value       counter,
         PRIMARY KEY ((route_id, service_id, api_id, identifier, period_date, period))
-      );
+      ) WITH transactions = { 'enabled' : true };
     ]],
   },
 }

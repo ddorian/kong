@@ -28,7 +28,7 @@ return {
         id    uuid   PRIMARY KEY,
         name  text,
         same  uuid
-      );
+      ) WITH transactions = { 'enabled' : true };
 
       CREATE INDEX IF NOT EXISTS ON foreign_entities(name);
 
@@ -36,7 +36,7 @@ return {
         id       uuid   PRIMARY KEY,
         name     text,
         same_id  uuid
-      );
+      ) WITH transactions = { 'enabled' : true };
 
       CREATE INDEX IF NOT EXISTS ON foreign_references (name);
       CREATE INDEX IF NOT EXISTS ON foreign_references (same_id);

@@ -26,7 +26,7 @@ return {
         consumer_id uuid,
         password    text,
         username    text
-      );
+      ) WITH transactions = { 'enabled' : true };
       CREATE INDEX IF NOT EXISTS ON basicauth_credentials(username);
       CREATE INDEX IF NOT EXISTS ON basicauth_credentials(consumer_id);
     ]],

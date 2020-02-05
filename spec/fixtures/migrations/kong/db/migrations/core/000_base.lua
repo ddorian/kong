@@ -25,11 +25,11 @@ return {
         data    text,
         nbf     timestamp,
         PRIMARY KEY (channel, at, node_id, id)
-      ) WITH default_time_to_live = 86400;
+      ) WITH default_time_to_live = 86400 AND transactions = { 'enabled' : true };
       CREATE TABLE IF NOT EXISTS consumers (
         id      uuid,
         PRIMARY KEY (id)
-      );
+      ) WITH transactions = { 'enabled' : true };
     ]],
   }
 }

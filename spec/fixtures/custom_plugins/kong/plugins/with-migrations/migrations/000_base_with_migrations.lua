@@ -11,7 +11,7 @@ return {
     up = [[
       CREATE TABLE IF NOT EXISTS foos (
         color text PRIMARY KEY
-      );
+      ) WITH transactions = { 'enabled' : true };;
     ]],
   },
 }

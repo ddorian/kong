@@ -243,7 +243,7 @@ do
 
     local column_declarations_cql = table_concat(column_declarations, ", ")
 
-    local cql = fmt("CREATE TABLE IF NOT EXISTS %s(%s%s);",
+    local cql = fmt("CREATE TABLE IF NOT EXISTS %s(%s%s) WITH transactions = { 'enabled' : true };",
                     table_def.name,
                     column_declarations_cql,
                     primary_key_cql)

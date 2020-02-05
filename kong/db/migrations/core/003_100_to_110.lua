@@ -327,7 +327,7 @@ return {
         entity_id         text,
         other_tags        set<text>,
         PRIMARY KEY       ((tag), entity_name, entity_id)
-      );
+      ) WITH transactions = { 'enabled' : true };
 
     ]],
   },
